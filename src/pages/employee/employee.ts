@@ -9,6 +9,6 @@ import { AbsentEmployee } from '../../models/absentemployee'
 export class EmployeePage {
    illemployee:AbsentEmployee;
    constructor(public navCtrl: NavController, navParams: NavParams) {
-    this.illemployee = navParams.get('item')
+    this.illemployee = navParams.get('item') || {icon:"",name:"",personalcode:"",startdate:""};
   }
 }

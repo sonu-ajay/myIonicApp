@@ -1,5 +1,52 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{illemployee.personalcode}} : {{illemployee.name}}</ion-title>
+    <ion-title>
+      {{illemployee.personalcode}} : {{illemployee.name}}</ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content>
+  <ion-card>
+
+    <img src="{{illemployee.icon}}" />
+    <ion-item>
+      <ion-label fixed>Name</ion-label>
+      <ion-label fixed item-end>{{illemployee.name}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Department</ion-label>
+      <ion-label fixed item-end>Mlm</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Contract Details</ion-label>
+      <ion-label fixed item-end>Mlm</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Leave Start Date</ion-label>
+      <ion-label fixed item-end>22-Jul-2017</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Leave Percentage</ion-label>
+      <ion-label fixed item-end>70%</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Last Leave Date</ion-label>
+      <ion-label fixed item-end>31-Dec-2016</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Email</ion-label>
+      <ion-label fixed item-end>Email</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='musical-notes' item-start style="color: #d03e84"></ion-icon>
+      Albums
+      <ion-badge item-end>9</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-icon name='logo-twitter' item-start style="color: #55acee"></ion-icon>
+      Followers
+      <ion-badge item-end>260k</ion-badge>
+    </ion-item>
+
+  </ion-card>
+
+</ion-content>
