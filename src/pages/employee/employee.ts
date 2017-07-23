@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
 import { NavController,NavParams } from 'ionic-angular';
-import { AbsentEmployee } from '../../models/absentemployee'
+import { Employee } from '../../models/employee';
+import { ActionsPage } from '../actions/actions'
 
 @Component({
   selector: 'page-employee',
   templateUrl: 'employee.html'
 })
 export class EmployeePage {
-   illemployee:AbsentEmployee;
+   emp:Employee;
    constructor(public navCtrl: NavController, navParams: NavParams) {
-    this.illemployee = navParams.get('item') || {icon:"",name:"",personalcode:"",startdate:""};
+    this.emp = navParams.get('item') || {icon:"",name:"",personalcode:"",startdate:""};
+  }
+  getActions(item: Employee) {
+    this.navCtrl.push(ActionsPage, {
+      item: item
+    });
   }
 }

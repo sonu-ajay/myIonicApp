@@ -3,6 +3,8 @@ import { NavController, AlertController, LoadingController } from 'ionic-angular
 import { Auth, User, UserDetails, IDetailedError } from '@ionic/cloud-angular';
 import { HomePage } from '../home/home';
 import { InAppBrowser } from 'ionic-native';
+// declare var WindowsAzure: any;
+// var client = new WindowsAzure.MobileServiceClient("http://ajaysmobileapp.azurewebsites.net");
 
 @Component({
   selector: 'page-login',
@@ -10,6 +12,7 @@ import { InAppBrowser } from 'ionic-native';
 })
 export class LoginPage {
     loading: any;
+    
 
   constructor(public navCtrl: NavController, public auth: Auth, public user: User, private loadingCtrl: LoadingController) {
 
@@ -25,21 +28,11 @@ export class LoginPage {
  
   }
 
-  login(email, password){
+  login(){
  
     this.showLoader();
- 
-    let details: UserDetails = {
-        'email': email,
-        'password': password
-    };
- 
-    this.auth.login('custom').then(() => {
- 
-        this.loading.dismiss();
-        // let browser=new InAppBrowser("https://www.google.co.in/");
-        // browser.show();
- 
+    this.auth.login('custom').then(() => { 
+        this.loading.dismiss(); 
         // success
         console.log(this.user);
  

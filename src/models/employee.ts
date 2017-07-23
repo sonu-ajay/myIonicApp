@@ -1,4 +1,4 @@
-export class AbsentEmployee{
+export class Employee{
     name:string;
     personalcode:string;
     startdate:string;

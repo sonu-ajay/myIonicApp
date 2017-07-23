@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AbsentEmployee } from '../../models/absentemployee';
+import { Employee } from '../../models/employee';
 import { EmployeePage } from '../employee/employee'
 
 @Component({
@@ -8,7 +8,7 @@ import { EmployeePage } from '../employee/employee'
   templateUrl: 'home.html'
 })
 export class HomePage {
-  absentemployees:AbsentEmployee[];
+  absentemployees:Employee[];
   constructor(public navCtrl: NavController) {
     this.initializeEmployees();
   }
@@ -25,7 +25,7 @@ export class HomePage {
     {icon:"assets/jacob.jpg", name:"Jacob Kochekkan", personalcode:"1819", startdate:"22-July-2017"}
   ];
   }
-  openEmployee(item: AbsentEmployee) {
+  openEmployee(item: Employee) {
     this.navCtrl.push(EmployeePage, {
       item: item
     });

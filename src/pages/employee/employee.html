@@ -1,52 +1,59 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{illemployee.personalcode}} : {{illemployee.name}}</ion-title>
+      {{emp.personalcode}} : {{emp.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-card>
 
-    <img src="{{illemployee.icon}}" />
-    <ion-item>
-      <ion-label fixed>Name</ion-label>
-      <ion-label fixed item-end>{{illemployee.name}}</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Department</ion-label>
-      <ion-label fixed item-end>Mlm</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Contract Details</ion-label>
-      <ion-label fixed item-end>Mlm</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Leave Start Date</ion-label>
-      <ion-label fixed item-end>22-Jul-2017</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Leave Percentage</ion-label>
-      <ion-label fixed item-end>70%</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Last Leave Date</ion-label>
-      <ion-label fixed item-end>31-Dec-2016</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label fixed>Email</ion-label>
-      <ion-label fixed item-end>Email</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-icon name='musical-notes' item-start style="color: #d03e84"></ion-icon>
-      Albums
-      <ion-badge item-end>9</ion-badge>
-    </ion-item>
-    <ion-item>
-      <ion-icon name='logo-twitter' item-start style="color: #55acee"></ion-icon>
-      Followers
-      <ion-badge item-end>260k</ion-badge>
-    </ion-item>
-
+    <img src="{{emp.icon}}" />
+    <ion-list>
+      <ion-item>
+        <ion-icon name='contact' item-start style="color:violet"></ion-icon>
+        <h2>Name</h2>
+        <h2 item-end>{{emp.name}}</h2>
+      </ion-item>
+      <ion-item>
+        <ion-icon name='cube' item-start style="color: indigo"></ion-icon>
+        <h2>Department</h2>
+        <h2 item-end>Mlm</h2>
+      </ion-item>
+      <ion-item>
+        <ion-icon name='contract' item-start style="color: blue"></ion-icon>
+        <h2>Contract Details</h2>
+        <h2 item-end>Mlm</h2>
+      </ion-item>
+      <ion-item>
+        <ion-icon name='calendar' item-start style="color: green"></ion-icon>
+        <h2>Leave Start Date</h2>
+        <h2 item-end>22-Jul-2017</h2>
+      </ion-item>
+      <ion-item>
+        <ion-icon name='calculator' item-start style="color:yellow"></ion-icon>
+        <h2>Leave Percentage</h2>
+        <h2 item-end>70%</h2>
+      </ion-item>
+      <ion-item>
+        <ion-icon name='calendar' item-start style="color: orange"></ion-icon>
+        <h2>Last Leave Date</h2>
+        <h2 item-end>31-Dec-2016</h2>
+      </ion-item>
+      <ion-list-header><h2>Actions</h2></ion-list-header>
+      <ion-item-sliding>
+        <button ion-item (click)="getActions(emp)">
+         <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
+          Suggested Actions
+        <ion-badge item-end>6</ion-badge>
+        </button>
+      </ion-item-sliding>
+      <ion-item-sliding>
+        <button ion-item (click)="getActions(emp)">
+         <ion-icon name='arrow-forward' item-start style="color: #0ac4aa"></ion-icon>
+          Predefined Actions
+        <ion-badge item-end>18</ion-badge>
+        </button>
+      </ion-item-sliding>
+    </ion-list>
   </ion-card>
-
 </ion-content>

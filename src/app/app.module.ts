@@ -10,6 +10,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { EmployeePage } from '../pages/employee/employee';
+import { ActionsPage } from '../pages/actions/actions';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,7 +29,8 @@ const cloudSettings: CloudSettings = {
     ContactPage,
     HomePage,
     TabsPage,
-    EmployeePage
+    EmployeePage,
+    ActionsPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ const cloudSettings: CloudSettings = {
     ContactPage,
     HomePage,
     TabsPage,
-    EmployeePage
+    EmployeePage,
+    ActionsPage
   ],
   providers: [
     StatusBar,
