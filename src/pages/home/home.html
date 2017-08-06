@@ -7,16 +7,16 @@
 <ion-content>
   <ion-card *ngFor="let item of absentemployees">
     <ion-list>
-      <ion-item (click)="showAlert()">
-        <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
+      <ion-item (click)="presentActionSheet(item)">
+        <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
         <h2>Call the Employee</h2>
         <p>Used 198 times</p>
-        <ion-badge item-end color="secondary">
+        <ion-badge color="secondary">
           <ion-icon name="flash"></ion-icon>
           Suggessted
         </ion-badge>
       </ion-item>      
-      <ion-item (click)="showAlert()">
+      <ion-item (click)="presentActionSheet(item)">
         <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
         <h2>Send him flowers and cards</h2>
         <p>Used 89 times</p>
