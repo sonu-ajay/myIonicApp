@@ -1,21 +1,32 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Ill Employees</ion-title>
+    <ion-title>
+      Today's Actions</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
-  <ion-searchbar (ionInput)="getEmployees($event)" placeholder="Search Employees"></ion-searchbar>
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of absentemployees">
-      <button ion-item (click)="openEmployee(item)">
-        <ion-avatar item-start>
-          <img [src]="item.icon" />
-        </ion-avatar>
-        <h2>{{item.personalcode}} : {{item.name}}</h2>
-        <p>{{item.startdate}}</p>
-        <!--<ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>-->
-      </button>      
-    </ion-item-sliding>
-  </ion-list>
+  <ion-card *ngFor="let item of absentemployees">
+    <ion-list>
+      <ion-item (click)="showAlert()">
+        <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
+        <h2>Call the Employee</h2>
+        <p>Used 198 times</p>
+        <ion-badge item-end color="secondary">
+          <ion-icon name="flash"></ion-icon>
+          Suggessted
+        </ion-badge>
+      </ion-item>      
+      <ion-item (click)="showAlert()">
+        <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
+        <h2>Send him flowers and cards</h2>
+        <p>Used 89 times</p>
+      </ion-item>
+    </ion-list>
+    <hr/>
+    <ion-item (click)="openEmployee(item)">
+      <ion-icon name="contact" item-start></ion-icon>
+      {{item.personalcode}} : {{item.name}}
+      <p>{{item.startdate}}</p>
+    </ion-item>
+  </ion-card>
 </ion-content>

@@ -4,7 +4,6 @@
   "type": "ionic-angular",
   "proxies": [
     {
-      "path": "/login",
       "proxyUrl": "http://ajaysmobileapp.azurewebsites.net"
     }
   ]

@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { NavController,AlertController,ModalController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Employee } from '../../models/employee';
+//import { EmployeePage } from '../employee/employee';
 import { ActionsPage } from '../actions/actions';
-import { EmployeePage } from '../employee/employee';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-sickemployees',
+  templateUrl: 'sickemployees.html'
 })
-export class HomePage {
+export class SickEmployeesPage {
   absentemployees:Employee[];
-  constructor(public navCtrl: NavController,public alertCtrl:AlertController,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController) {
     this.initializeEmployees();
   }
 
@@ -26,10 +26,10 @@ export class HomePage {
     {icon:"assets/jacob.jpg", name:"Jacob Kochekkan", personalcode:"1819", startdate:"22-July-2017"}
   ];
   }
-  openEmployee(employee: Employee) {
-    console.log(employee);
-    let modal = this.modalCtrl.create(EmployeePage,{emp:employee});
-    modal.present();    
+  openEmployee(item: Employee) {
+    this.navCtrl.push(ActionsPage, {
+      item: item
+    });
   }
 
   getEmployees(ev) {
@@ -45,14 +45,5 @@ export class HomePage {
         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
-  }
-
-  showAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Action Clicked!',
-      subTitle: "Sorry I didn't implement this!",
-      buttons: ['OK']
-    });
-    alert.present();
   }
 }

@@ -1,12 +1,18 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{emp.personalcode}} : {{emp.name}}</ion-title>
+      {{emp.personalcode}} : {{emp.name}}
+      </ion-title>
+      <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-card>
-
     <img src="{{emp.icon}}" />
     <ion-list>
       <ion-item>

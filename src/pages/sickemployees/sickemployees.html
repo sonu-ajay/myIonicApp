@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Sick Employees</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar (ionInput)="getEmployees($event)" placeholder="Search Employees"></ion-searchbar>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of absentemployees">
+      <button ion-item (click)="openEmployee(item)">
+        <ion-avatar item-start>
+          <img [src]="item.icon" />
+        </ion-avatar>
+        <h2>{{item.personalcode}} : {{item.name}}</h2>
+        <p>{{item.startdate}}</p>
+        <!--<ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>-->
+      </button>      
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
