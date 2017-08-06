@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ActionSheetController,AlertController } from 'ionic-angular';
 import { Employee } from '../../models/employee';
-import { ActionsPage } from '../actions/actions';
 import { EmployeePage } from '../employee/employee';
 
 @Component({
