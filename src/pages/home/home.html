@@ -5,23 +5,90 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-slides>
+          <ion-slide *ngFor="let emp of absentemployees">
+            <ion-list>
+              <ion-item>
+                <ion-icon name='keypad' item-start style="color:red"></ion-icon>
+                <h2>Personal Code</h2>
+                <h2 item-end>{{emp.personalcode}}</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='contact' item-start style="color:violet"></ion-icon>
+                <h2>Name</h2>
+                <h2 item-end>{{emp.name}}</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='cube' item-start style="color: indigo"></ion-icon>
+                <h2>Department</h2>
+                <h2 item-end>Mlm</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='contract' item-start style="color: blue"></ion-icon>
+                <h2>Contract Details</h2>
+                <h2 item-end>Mlm</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='calendar' item-start style="color: green"></ion-icon>
+                <h2>Leave Start Date</h2>
+                <h2 item-end>22-Jul-2017</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='calculator' item-start style="color:yellow"></ion-icon>
+                <h2>Leave Percentage</h2>
+                <h2 item-end>70%</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='calendar' item-start style="color: orange"></ion-icon>
+                <h2>Last Leave Date</h2>
+                <h2 item-end>31-Dec-2016</h2>
+              </ion-item>
+            </ion-list>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-title>Actions</ion-title>
+        <ion-list>
+          <ion-item (click)="presentActionSheet(item)">
+            <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
+            <h2>Call the Employee</h2>
+            <p>Used 198 times</p>
+            <ion-badge color="secondary">
+              <ion-icon name="flash"></ion-icon>
+              Suggessted
+            </ion-badge>
+          </ion-item>
+          <ion-item (click)="presentActionSheet(item)">
+            <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
+            <h2>Send him flowers and cards</h2>
+            <p>Used 89 times</p>
+          </ion-item>
+          <ion-item (click)="presentActionSheet(item)">
+            <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
+            <h2>Call the Employee</h2>
+            <p>Used 198 times</p>
+            <ion-badge color="secondary">
+              <ion-icon name="flash"></ion-icon>
+              Suggessted
+            </ion-badge>
+          </ion-item>
+          <ion-item (click)="presentActionSheet(item)">
+            <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
+            <h2>Send him flowers and cards</h2>
+            <p>Used 89 times</p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-card *ngFor="let item of absentemployees">
-    <ion-list>
-      <ion-item (click)="presentActionSheet(item)">
-        <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
-        <h2>Call the Employee</h2>
-        <p>Used 198 times</p>
-        <ion-badge color="secondary">
-          <ion-icon name="flash"></ion-icon>
-          Suggessted
-        </ion-badge>
-      </ion-item>      
-      <ion-item (click)="presentActionSheet(item)">
-        <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
-        <h2>Send him flowers and cards</h2>
-        <p>Used 89 times</p>
-      </ion-item>
-    </ion-list>
+
     <hr/>
     <ion-item (click)="openEmployee(item)">
       <ion-icon name="contact" item-start></ion-icon>

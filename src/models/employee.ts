@@ -1,6 +1,9 @@
 export class Employee{
-    name:string;
-    personalcode:string;
-    startdate:string;
+    employeeId:number;
+    personalCode:string;
+    name:string;    
+    department:string;
+    leaveStartDate:string;
+    leavePercentage:number;
     icon:string;
 }
