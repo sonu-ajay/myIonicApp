@@ -16,6 +16,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,public alertCtrl:AlertController) {
     this.initializeEmployees();
+    this.getActions();
   }
 
   initializeEmployees() {

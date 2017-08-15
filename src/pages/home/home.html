@@ -45,54 +45,17 @@
       <ion-col>
         <ion-title>Actions</ion-title>
         <ion-list>
-          <ion-item *ngFor="let act of absentemployees" (click)="presentActionSheet(item)">
+          <ion-item *ngFor="let act of actions" (click)="presentActionSheet(item)">
             <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
             <h2>{{act.title}}</h2>
-            <p>Used {{act.usageCount}} times</p>
-            <ion-badge color="secondary">
+            <p>Used {{act.usageCount}} times</p>            
+            <ion-badge color="secondary" ng-show="act.isSuggested">
               <ion-icon name="flash"></ion-icon>
               Suggessted
             </ion-badge>
-          </ion-item>
-          <ion-item (click)="presentActionSheet(item)">
-            <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
-            <h2>Call the Employee</h2>
-            <p>Used 198 times</p>
-            <ion-badge color="secondary">
-              <ion-icon name="flash"></ion-icon>
-              Suggessted
-            </ion-badge>
-          </ion-item>
-          <ion-item (click)="presentActionSheet(item)">
-            <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
-            <h2>Send him flowers and cards</h2>
-            <p>Used 89 times</p>
-          </ion-item>
-          <ion-item (click)="presentActionSheet(item)">
-            <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
-            <h2>Call the Employee</h2>
-            <p>Used 198 times</p>
-            <ion-badge color="secondary">
-              <ion-icon name="flash"></ion-icon>
-              Suggessted
-            </ion-badge>
-          </ion-item>
-          <ion-item (click)="presentActionSheet(item)">
-            <ion-icon name='arrow-forward' item-start style="color: #c40a1b"></ion-icon>
-            <h2>Send him flowers and cards</h2>
-            <p>Used 89 times</p>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card *ngFor="let item of absentemployees">
-
-    <hr/>
-    <ion-item (click)="openEmployee(item)">
-      <ion-icon name="contact" item-start></ion-icon>
-      {{item.personalcode}} : {{item.name}}
-      <p>{{item.startdate}}</p>
-    </ion-item>
-  </ion-card>
 </ion-content>
