@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{emp.personalcode}} : {{emp.name}}
+      {{emp.personalCode}} : {{emp.name}}
       </ion-title>
       <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -16,6 +16,11 @@
     <img src="{{emp.icon}}" />
     <ion-list>
       <ion-item>
+        <ion-icon name='keypad' item-start style="color:red"></ion-icon>
+        <h2>Personal Code</h2>
+        <h2 item-end>{{emp.personalCode}}</h2>
+      </ion-item>
+      <ion-item>
         <ion-icon name='contact' item-start style="color:violet"></ion-icon>
         <h2>Name</h2>
         <h2 item-end>{{emp.name}}</h2>
@@ -23,28 +28,18 @@
       <ion-item>
         <ion-icon name='cube' item-start style="color: indigo"></ion-icon>
         <h2>Department</h2>
-        <h2 item-end>Mlm</h2>
-      </ion-item>
-      <ion-item>
-        <ion-icon name='contract' item-start style="color: blue"></ion-icon>
-        <h2>Contract Details</h2>
-        <h2 item-end>Mlm</h2>
+        <h2 item-end>{{emp.department}}</h2>
       </ion-item>
       <ion-item>
         <ion-icon name='calendar' item-start style="color: green"></ion-icon>
         <h2>Leave Start Date</h2>
-        <h2 item-end>22-Jul-2017</h2>
+        <h2 item-end>{{emp.leaveStartDate}}</h2>
       </ion-item>
       <ion-item>
         <ion-icon name='calculator' item-start style="color:yellow"></ion-icon>
         <h2>Leave Percentage</h2>
-        <h2 item-end>70%</h2>
+        <h2 item-end>{{emp.leavePercentage}}%</h2>
       </ion-item>
-      <ion-item>
-        <ion-icon name='calendar' item-start style="color: orange"></ion-icon>
-        <h2>Last Leave Date</h2>
-        <h2 item-end>31-Dec-2016</h2>
-      </ion-item>      
     </ion-list>
   </ion-card>
 </ion-content>

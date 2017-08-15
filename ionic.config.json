@@ -1,10 +1,5 @@
 {
   "name": "myIonicApp",
   "app_id": "618e638c",
-  "type": "ionic-angular",
-  "proxies": [
-    {
-      "proxyUrl": "http://ajaysmobileapp.azurewebsites.net"
-    }
-  ]
+  "type": "ionic-angular"
 }

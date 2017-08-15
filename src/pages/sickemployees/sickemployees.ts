@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Employee } from '../../models/employee';
+import { SampleEmployees } from '../../models/sampleemployees';
 //import { EmployeePage } from '../employee/employee';
 import { ActionsPage } from '../actions/actions';
 
@@ -15,16 +16,8 @@ export class SickEmployeesPage {
   }
 
   initializeEmployees(){
-    this.absentemployees=[
-    {icon:"assets/ajay.jpg", name:"Ajay Kumar Singh", personalcode:"123", startdate:"22-July-2017"},
-    {icon:"assets/icon/cheetah.jpg", name:"Juned Jahangirdar", personalcode:"456", startdate:"22-July-2017"},
-    {icon:"assets/mayank.jpg", name:"Mayank Shekhar", personalcode:"678", startdate:"22-July-2017"},
-    {icon:"assets/rohit.jpg", name:"Rohit Tiwari", personalcode:"911", startdate:"22-July-2017"},
-    {icon:"assets/satish.jpg", name:"Satish Vekatakrishnan", personalcode:"1213", startdate:"22-July-2017"},
-    {icon:"assets/likhit.jpg", name:"Likhit Raj", personalcode:"1415", startdate:"22-July-2017"},
-    {icon:"assets/sai.jpg", name:"Sai Kumar Chilamkoti", personalcode:"1617", startdate:"22-July-2017"},
-    {icon:"assets/jacob.jpg", name:"Jacob Kochekkan", personalcode:"1819", startdate:"22-July-2017"}
-  ];
+    let emps=new SampleEmployees();
+    this.absentemployees=emps.employees;
   }
   openEmployee(item: Employee) {
     this.navCtrl.push(ActionsPage, {

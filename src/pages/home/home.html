@@ -14,7 +14,7 @@
               <ion-item>
                 <ion-icon name='keypad' item-start style="color:red"></ion-icon>
                 <h2>Personal Code</h2>
-                <h2 item-end>{{emp.personalcode}}</h2>
+                <h2 item-end>{{emp.personalCode}}</h2>
               </ion-item>
               <ion-item>
                 <ion-icon name='contact' item-start style="color:violet"></ion-icon>
@@ -24,27 +24,17 @@
               <ion-item>
                 <ion-icon name='cube' item-start style="color: indigo"></ion-icon>
                 <h2>Department</h2>
-                <h2 item-end>Mlm</h2>
-              </ion-item>
-              <ion-item>
-                <ion-icon name='contract' item-start style="color: blue"></ion-icon>
-                <h2>Contract Details</h2>
-                <h2 item-end>Mlm</h2>
+                <h2 item-end>{{emp.department}}</h2>
               </ion-item>
               <ion-item>
                 <ion-icon name='calendar' item-start style="color: green"></ion-icon>
                 <h2>Leave Start Date</h2>
-                <h2 item-end>22-Jul-2017</h2>
+                <h2 item-end>{{emp.leaveStartDate}}</h2>
               </ion-item>
               <ion-item>
                 <ion-icon name='calculator' item-start style="color:yellow"></ion-icon>
                 <h2>Leave Percentage</h2>
-                <h2 item-end>70%</h2>
-              </ion-item>
-              <ion-item>
-                <ion-icon name='calendar' item-start style="color: orange"></ion-icon>
-                <h2>Last Leave Date</h2>
-                <h2 item-end>31-Dec-2016</h2>
+                <h2 item-end>{{emp.leavePercentage}}%</h2>
               </ion-item>
             </ion-list>
           </ion-slide>
@@ -55,6 +45,15 @@
       <ion-col>
         <ion-title>Actions</ion-title>
         <ion-list>
+          <ion-item *ngFor="let act of absentemployees" (click)="presentActionSheet(item)">
+            <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
+            <h2>{{act.title}}</h2>
+            <p>Used {{act.usageCount}} times</p>
+            <ion-badge color="secondary">
+              <ion-icon name="flash"></ion-icon>
+              Suggessted
+            </ion-badge>
+          </ion-item>
           <ion-item (click)="presentActionSheet(item)">
             <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
             <h2>Call the Employee</h2>
