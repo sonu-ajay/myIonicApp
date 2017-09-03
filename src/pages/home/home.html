@@ -59,21 +59,21 @@
               </ion-badge>
             </ion-item>
             <ion-item-options side="right">
-                <button ion-button (click)="presentActionSheet(item)">
+                <button color="primary" ion-button (click)="presentActionSheet(item)">
                     <ion-icon name="menu"></ion-icon>
                     More
                   </button>
-              <button ion-button (click)="archive(item)">
-                  <ion-icon name="document"></ion-icon>
-                  Make Note
+              <button color="primary" ion-button (click)="callEmployee(currentEmployee)">
+                  <ion-icon name="call"></ion-icon>
+                  Call
                 </button>
-              <button ion-button (click)="removeAction(act)">
+              <button color="secondary" ion-button (click)="removeAction(act)">
                     <ion-icon name="checkmark-circle"></ion-icon>
                     Mark Done
                   </button>
             </ion-item-options>
             <ion-item-options side="left">
-              <button ion-button (click)="removeAction(act)">
+              <button color="danger" ion-button (click)="removeAction(act)">
                   <ion-icon name="close-circle"></ion-icon>
                   Delete
                 </button>

@@ -6,6 +6,7 @@ import { SampleEmployees } from '../../models/sampleemployees';
 import { SampleActions } from '../../models/sampleactions';
 import { EmployeePage } from '../employee/employee';
 import { Slides } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number';
 
 @Component({
   selector: 'page-home',
@@ -16,8 +17,10 @@ export class HomePage {
   absentemployees: Employee[];
   actions: Action[];
   currentSlideIndex:number;
+  currentEmployee:Employee;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController) {
+    public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
+    private callNumber: CallNumber) {
       this.currentSlideIndex=0;
       this.initializeEmployees();    
   }
@@ -25,18 +28,17 @@ export class HomePage {
   initializeEmployees() {
     let emps = new SampleEmployees();
     this.absentemployees = emps.employees;
-    var emp = this.absentemployees[this.currentSlideIndex];
-    let act = new SampleActions(emp.name);
+    this.currentEmployee = this.absentemployees[this.currentSlideIndex];
+    let act = new SampleActions(this.currentEmployee.name);
     this.actions = act.actions;
   }
 
   getActions() {    
     this.currentSlideIndex = this.slides.getActiveIndex();
 
-    var emp = this.absentemployees[this.currentSlideIndex];
-    console.log('Current employee is', emp);
+    this.currentEmployee = this.absentemployees[this.currentSlideIndex];
+    let act = new SampleActions(this.currentEmployee.name);
 
-    let act = new SampleActions(emp.name);
     this.actions = act.actions;
   }
 
@@ -52,6 +54,12 @@ export class HomePage {
     if (index !== -1) {
       this.absentemployees.splice(index, 1);
     }
+  }
+
+  callEmployee(emp:Employee){
+    this.callNumber.callNumber(emp.contactnumber, true)
+    .then()
+    .catch(() => console.log('Error launching dialer'));
   }
 
   openEmployee(employee: Employee) {
