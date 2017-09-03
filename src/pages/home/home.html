@@ -5,10 +5,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+    <ion-fab top right edge>
+            <button ion-fab color="vibrant" mini><ion-icon name="add"></ion-icon></button>
+          </ion-fab>
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-slides>
+        <ion-slides (ionSlideDidChange)="getActions()">
           <ion-slide *ngFor="let emp of absentemployees">
             <ion-list>
               <ion-item>
@@ -45,15 +48,37 @@
       <ion-col>
         <ion-title>Actions</ion-title>
         <ion-list>
-          <ion-item *ngFor="let act of actions" (click)="presentActionSheet(item)">
-            <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
-            <h2>{{act.title}}</h2>
-            <p>Used {{act.usageCount}} times</p>            
-            <ion-badge color="secondary" ng-show="act.isSuggested">
-              <ion-icon name="flash"></ion-icon>
-              Suggessted
-            </ion-badge>
-          </ion-item>
+          <ion-item-sliding *ngFor="let act of actions">
+            <ion-item>
+              <ion-icon name='flash' item-start style="color: #c40a1b"></ion-icon>
+              <h2>{{act.title}}</h2>
+              <p>Used {{act.usageCount}} times</p>
+              <ion-badge color="secondary" ng-show="act.isSuggested">
+                <ion-icon name="flash"></ion-icon>
+                Suggessted
+              </ion-badge>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button (click)="presentActionSheet(item)">
+                    <ion-icon name="menu"></ion-icon>
+                    More
+                  </button>
+              <button ion-button (click)="archive(item)">
+                  <ion-icon name="document"></ion-icon>
+                  Make Note
+                </button>
+              <button ion-button (click)="removeAction(act)">
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                    Mark Done
+                  </button>
+            </ion-item-options>
+            <ion-item-options side="left">
+              <button ion-button (click)="removeAction(act)">
+                  <ion-icon name="close-circle"></ion-icon>
+                  Delete
+                </button>
+            </ion-item-options>
+          </ion-item-sliding>
         </ion-list>
       </ion-col>
     </ion-row>
