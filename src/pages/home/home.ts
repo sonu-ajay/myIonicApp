@@ -1,11 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ModalController, ActionSheetController, AlertController } from 'ionic-angular';
+import {
+  NavController,
+  ModalController,
+  ActionSheetController,
+  AlertController
+} from 'ionic-angular';
 import { Employee } from '../../models/employee';
 import { Action } from '../../models/action';
 import { SampleEmployees } from '../../models/sampleemployees';
 import { SampleActions } from '../../models/sampleactions';
 import { EmployeePage } from '../employee/employee';
 import { Slides } from 'ionic-angular';
+
+import { SickEmployeeService } from '../../_services/sickemployee.service';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -14,12 +22,13 @@ export class HomePage {
   @ViewChild(Slides) slides: Slides;
   absentemployees: Employee[];
   actions: Action[];
-  currentSlideIndex:number;
-  currentEmployee:Employee;
+  currentSlideIndex: number;
+  currentEmployee: Employee;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController) {
-      this.currentSlideIndex=0;
-      this.initializeEmployees();    
+    public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
+    public sickemployees: SickEmployeeService) {
+    this.currentSlideIndex = 0;
+    this.initializeEmployees();
   }
 
   initializeEmployees() {
@@ -30,7 +39,7 @@ export class HomePage {
     this.actions = act.actions;
   }
 
-  getActions() {    
+  getActions() {
     this.currentSlideIndex = this.slides.getActiveIndex();
 
     this.currentEmployee = this.absentemployees[this.currentSlideIndex];
@@ -39,14 +48,14 @@ export class HomePage {
     this.actions = act.actions;
   }
 
-  removeAction(action){
+  removeAction(action) {
     let index: number = this.actions.indexOf(action);
     if (index !== -1) {
       this.actions.splice(index, 1);
     }
   }
 
-  markActionDone(emp){
+  markActionDone(emp) {
     let index: number = this.absentemployees.indexOf(emp);
     if (index !== -1) {
       this.absentemployees.splice(index, 1);
