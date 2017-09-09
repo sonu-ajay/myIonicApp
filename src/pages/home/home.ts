@@ -6,8 +6,6 @@ import { SampleEmployees } from '../../models/sampleemployees';
 import { SampleActions } from '../../models/sampleactions';
 import { EmployeePage } from '../employee/employee';
 import { Slides } from 'ionic-angular';
-import { CallNumber } from '@ionic-native/call-number';
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -19,8 +17,7 @@ export class HomePage {
   currentSlideIndex:number;
   currentEmployee:Employee;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
-    private callNumber: CallNumber) {
+    public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController) {
       this.currentSlideIndex=0;
       this.initializeEmployees();    
   }
@@ -56,11 +53,11 @@ export class HomePage {
     }
   }
 
-  callEmployee(emp:Employee){
-    this.callNumber.callNumber(emp.contactnumber, true)
-    .then()
-    .catch(() => console.log('Error launching dialer'));
-  }
+  // callEmployee(emp:Employee){
+  //   this.callNumber.callNumber(emp.contactnumber, true)
+  //   .then()
+  //   .catch(() => console.log('Error launching dialer'));
+  // }
 
   openEmployee(employee: Employee) {
     console.log(employee);
