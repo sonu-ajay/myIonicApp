@@ -11,8 +11,10 @@ import { SampleEmployees } from '../../models/sampleemployees';
 import { SampleActions } from '../../models/sampleactions';
 import { EmployeePage } from '../employee/employee';
 import { Slides } from 'ionic-angular';
+import { GoogleMaps } from '@ionic-native/google-maps';
 
 import { SickEmployeeService } from '../../_services/sickemployee.service';
+import { MapsComponent } from '../map/map.component';
 
 @Component({
   selector: 'page-home',
@@ -26,7 +28,8 @@ export class HomePage {
   currentEmployee: Employee;
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
-    public sickemployees: SickEmployeeService) {
+    public sickemployees: SickEmployeeService,
+    public maps: GoogleMaps) {
     this.currentSlideIndex = 0;
     this.initializeEmployees();
   }
@@ -68,6 +71,12 @@ export class HomePage {
   //   .catch(() => console.log('Error launching dialer'));
   // }
 
+  openMaps() {
+    
+    let modal = this.modalCtrl.create(MapsComponent, { });
+    modal.present();
+  }
+
   openEmployee(employee: Employee) {
     console.log(employee);
     let modal = this.modalCtrl.create(EmployeePage, { emp: employee });
@@ -94,6 +103,12 @@ export class HomePage {
       title: 'Perform Actions',
       buttons: [
         {
+          text: 'Book Appointment',
+          role: 'BookAppt',
+          handler: () => {
+            this.openMaps();
+          }
+        }, {
           text: 'Remove It',
           role: 'Remove',
           handler: () => {

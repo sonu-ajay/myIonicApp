@@ -14,6 +14,16 @@ import { ActionsPage } from '../pages/actions/actions';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
+import { Geolocation } from '@ionic-native/geolocation';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  GoogleMapOptions,
+  CameraPosition,
+  MarkerOptions,
+  Marker
+ } from '@ionic-native/google-maps';
 
 import { SickEmployeeService } from '../_services/sickemployee.service';
 
@@ -47,6 +57,9 @@ import { SickEmployeeService } from '../_services/sickemployee.service';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
+    GoogleMaps,
+    GoogleMap,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     SickEmployeeService
   ]
