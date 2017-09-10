@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import {
   NavController,
+  NavParams,
   ModalController,
   ActionSheetController,
   AlertController
@@ -11,10 +12,10 @@ import { SampleEmployees } from '../../models/sampleemployees';
 import { SampleActions } from '../../models/sampleactions';
 import { EmployeePage } from '../employee/employee';
 import { Slides } from 'ionic-angular';
-import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { SickEmployeeService } from '../../_services/sickemployee.service';
-import { MapsComponent } from '../map/map.component';
 
 @Component({
   selector: 'page-home',
@@ -29,17 +30,30 @@ export class HomePage {
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
     public sickemployees: SickEmployeeService,
-    public maps: GoogleMaps) {
+    private iab: InAppBrowser,
+    private geolocation: Geolocation,
+    navParams: NavParams) {
     this.currentSlideIndex = 0;
     this.initializeEmployees();
+    var emp = navParams.get('item');
+    console.log(emp);
+    
+    if(emp){
+      this.currentSlideIndex = emp.employeeId-1;
+      //this.currentEmployee=emp;      
+    }
+    this.initializeSlide();
   }
 
   initializeEmployees() {
     let emps = new SampleEmployees();
-    this.absentemployees = emps.employees;
+    this.absentemployees = emps.employees;    
+  }
+
+  initializeSlide(){
     this.currentEmployee = this.absentemployees[this.currentSlideIndex];
     let act = new SampleActions(this.currentEmployee.name);
-    this.actions = act.actions;
+    this.actions = act.actions;    
   }
 
   getActions() {
@@ -71,10 +85,19 @@ export class HomePage {
   //   .catch(() => console.log('Error launching dialer'));
   // }
 
-  openMaps() {
+  loadMap(searchstring:string) {
+    var location:any;
+    this.geolocation.getCurrentPosition().then((resp) => {
+      
+      const browser = this.iab.create('https://www.google.co.in/maps/search/'+searchstring+'/@'+resp.coords.latitude+','+resp.coords.longitude+'');  
+      browser.show();
+      // resp.coords.latitude
+      // resp.coords.longitude
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+
     
-    let modal = this.modalCtrl.create(MapsComponent, { });
-    modal.present();
   }
 
   openEmployee(employee: Employee) {
@@ -98,29 +121,33 @@ export class HomePage {
     }
   }
 
-  presentActionSheet(emp: Employee) {
+  presentActionSheet(action: Action) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Perform Actions',
       buttons: [
         {
+          text: 'Send Flowers',
+          role: 'SendFlowers',
+          handler: () => {
+            this.loadMap("Flowers");
+          }
+        }, {
           text: 'Book Appointment',
           role: 'BookAppt',
           handler: () => {
-            this.openMaps();
+            this.loadMap("Hospitals");
           }
         }, {
-          text: 'Remove It',
+          text: 'Remove Action',
           role: 'Remove',
           handler: () => {
-            let index: number = this.absentemployees.indexOf(emp);
-            if (index !== -1) {
-              this.absentemployees.splice(index, 1);
-            }
+            this.removeAction(action)
           }
         }, {
-          text: 'Mark Complete',
+          text: 'Mark Illness Complete',
           handler: () => {
-            this.showAlert("Action for : " + emp.name);
+            var emp=this.absentemployees.find(x => x.employeeId == action.employeeId);
+            this.markActionDone(emp);
           }
         }, {
           text: 'Cancel',

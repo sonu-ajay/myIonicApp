@@ -4,6 +4,7 @@ import { Employee } from '../../models/employee';
 import { SampleEmployees } from '../../models/sampleemployees';
 //import { EmployeePage } from '../employee/employee';
 import { ActionsPage } from '../actions/actions';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-sickemployees',
@@ -20,7 +21,7 @@ export class SickEmployeesPage {
     this.absentemployees=emps.employees;
   }
   openEmployee(item: Employee) {
-    this.navCtrl.push(ActionsPage, {
+    this.navCtrl.push(HomePage, {
       item: item
     });
   }

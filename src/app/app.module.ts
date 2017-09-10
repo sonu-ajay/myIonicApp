@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -10,20 +11,12 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SickEmployeesPage } from '../pages/sickemployees/sickemployees';
 import { EmployeePage } from '../pages/employee/employee';
 import { ActionsPage } from '../pages/actions/actions';
+import { MapsComponent } from '../pages/map/map.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
- } from '@ionic-native/google-maps';
 
 import { SickEmployeeService } from '../_services/sickemployee.service';
 
@@ -36,7 +29,8 @@ import { SickEmployeeService } from '../_services/sickemployee.service';
     TabsPage,
     SickEmployeesPage,
     EmployeePage,
-    ActionsPage
+    ActionsPage,
+    MapsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,14 +46,14 @@ import { SickEmployeeService } from '../_services/sickemployee.service';
     TabsPage,
     SickEmployeesPage,
     EmployeePage,
-    ActionsPage
+    ActionsPage,
+    MapsComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
-    GoogleMaps,
-    GoogleMap,
+    InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     SickEmployeeService
   ]
