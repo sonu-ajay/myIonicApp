@@ -86,18 +86,15 @@ export class HomePage {
   // }
 
   loadMap(searchstring:string) {
-    var location:any;
     this.geolocation.getCurrentPosition().then((resp) => {
       
-      const browser = this.iab.create('https://www.google.co.in/maps/search/'+searchstring+'/@'+resp.coords.latitude+','+resp.coords.longitude+'');  
+      const browser = this.iab.create('https://www.google.co.in/maps/search/'+searchstring+'/@'+resp.coords.latitude+','+resp.coords.longitude+'','_self','location=no');  
       browser.show();
       // resp.coords.latitude
       // resp.coords.longitude
      }).catch((error) => {
        console.log('Error getting location', error);
-     });
-
-    
+     });    
   }
 
   openEmployee(employee: Employee) {
