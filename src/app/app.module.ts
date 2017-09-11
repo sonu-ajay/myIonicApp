@@ -11,7 +11,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SickEmployeesPage } from '../pages/sickemployees/sickemployees';
 import { EmployeePage } from '../pages/employee/employee';
 import { ActionsPage } from '../pages/actions/actions';
-import { MapsComponent } from '../pages/map/map.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -19,6 +18,9 @@ import { HttpModule } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { SickEmployeeService } from '../_services/sickemployee.service';
+
+import { MapsProvider } from '../providers/map.provider';
+import { AlertProvider } from '../providers/alert.provider';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,7 @@ import { SickEmployeeService } from '../_services/sickemployee.service';
     TabsPage,
     SickEmployeesPage,
     EmployeePage,
-    ActionsPage,
-    MapsComponent
+    ActionsPage
   ],
   imports: [
     BrowserModule,
@@ -46,16 +47,17 @@ import { SickEmployeeService } from '../_services/sickemployee.service';
     TabsPage,
     SickEmployeesPage,
     EmployeePage,
-    ActionsPage,
-    MapsComponent
+    ActionsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    Geolocation,
+    Geolocation,    
     InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    SickEmployeeService
+    SickEmployeeService,
+    AlertProvider,
+    MapsProvider
   ]
 })
 export class AppModule { }

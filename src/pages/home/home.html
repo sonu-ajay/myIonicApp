@@ -22,7 +22,7 @@
                   <ion-icon name='keypad' item-start style="color:red"></ion-icon>
                   <h2>Personal Code</h2>
                   <h2 item-end>{{emp.personalCode}}</h2>
-                </ion-item>                
+                </ion-item>
                 <ion-item>
                   <ion-icon name='cube' item-start style="color: indigo"></ion-icon>
                   <h2>Department</h2>
@@ -42,13 +42,13 @@
     <ion-row>
       <ion-col>
         <ion-title>Suggested Actions</ion-title>
-       
+
         <ion-list>
-            <ion-fab top right edge>
-                <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-              </ion-fab>
+          <ion-fab top right edge>
+            <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+          </ion-fab>
           <ion-item-sliding *ngFor="let act of actions">
-            <ion-item>             
+            <ion-item>
               <h2>{{act.title}}</h2>
               <p>Used {{act.usageCount}} times</p>
               <ion-icon name='arrow-forward' item-end style="color: #c40a1b"></ion-icon>
@@ -58,7 +58,7 @@
                     <ion-icon name="menu"></ion-icon>
                     More Options
                   </button>
-              <a href="tel:{{currentEmployee.contactnumber}}" color="primary" ion-button>
+              <a href="tel:{{currentEmployee.contactnumber}}" color="secondary" ion-button>
                 <ion-icon name="call"></ion-icon>
                 Call Employee
               </a>

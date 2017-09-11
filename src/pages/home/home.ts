@@ -3,8 +3,7 @@ import {
   NavController,
   NavParams,
   ModalController,
-  ActionSheetController,
-  AlertController
+  ActionSheetController
 } from 'ionic-angular';
 import { Employee } from '../../models/employee';
 import { Action } from '../../models/action';
@@ -12,11 +11,10 @@ import { SampleEmployees } from '../../models/sampleemployees';
 import { SampleActions } from '../../models/sampleactions';
 import { EmployeePage } from '../employee/employee';
 import { Slides } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { SickEmployeeService } from '../../_services/sickemployee.service';
-import { LoadingController } from 'ionic-angular';
+
+import { MapsProvider } from '../../providers/map.provider';
 
 @Component({
   selector: 'page-home',
@@ -28,13 +26,8 @@ export class HomePage {
   actions: Action[];
   currentSlideIndex: number;
   currentEmployee: Employee;
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController,
-    public sickemployees: SickEmployeeService,
-    private iab: InAppBrowser,
-    private geolocation: Geolocation,
-    navParams: NavParams,
-    private loading: LoadingController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController,navParams: NavParams, 
+    public sickemployees: SickEmployeeService,public maps:MapsProvider) {
     this.currentSlideIndex = 0;
     this.initializeEmployees();
     var emp = navParams.get('item');
@@ -81,34 +74,6 @@ export class HomePage {
     }
   }
 
-  getLoader() {
-    return this.loading.create({
-      content: 'Loading Please Wait...',
-    });
-  }
-
-  // callEmployee(emp:Employee){
-  //   this.callNumber.callNumber(emp.contactnumber, true)
-  //   .then()
-  //   .catch(() => console.log('Error launching dialer'));
-  // }
-
-  loadMap(searchstring: string) {
-    var loader = this.getLoader();
-    loader.present().then(() => {
-      this.geolocation.getCurrentPosition().then((resp) => {
-
-        const browser = this.iab.create('https://www.google.co.in/maps/search/' + searchstring + '/@' + resp.coords.latitude + ',' + resp.coords.longitude + '', '_self', 'location=no');
-        browser.show();
-        // resp.coords.latitude
-        // resp.coords.longitude
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
-      loader.dismiss();
-    });
-  }
-
   openEmployee(employee: Employee) {
     console.log(employee);
     let modal = this.modalCtrl.create(EmployeePage, { emp: employee });
@@ -137,13 +102,13 @@ export class HomePage {
           text: 'Send Flowers',
           role: 'SendFlowers',
           handler: () => {
-            this.loadMap("Flowers");
+            this.maps.loadMap("Flowers");
           }
         }, {
           text: 'Book Appointment',
           role: 'BookAppt',
           handler: () => {
-            this.loadMap("Hospitals");
+            this.maps.loadMap("Hospitals");
           }
         }, {
           text: 'Remove Action',
@@ -168,14 +133,4 @@ export class HomePage {
     });
     actionSheet.present();
   }
-
-  showAlert(msg) {
-    let alert = this.alertCtrl.create({
-      title: msg + ' Clicked!',
-      subTitle: "Sorry Its still not implemented!",
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
 }
