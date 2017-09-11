@@ -16,6 +16,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { SickEmployeeService } from '../../_services/sickemployee.service';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -32,14 +33,15 @@ export class HomePage {
     public sickemployees: SickEmployeeService,
     private iab: InAppBrowser,
     private geolocation: Geolocation,
-    navParams: NavParams) {
+    navParams: NavParams,
+    private loading: LoadingController) {
     this.currentSlideIndex = 0;
     this.initializeEmployees();
     var emp = navParams.get('item');
     console.log(emp);
-    
-    if(emp){
-      this.currentSlideIndex = emp.employeeId-1;
+
+    if (emp) {
+      this.currentSlideIndex = emp.employeeId - 1;
       //this.currentEmployee=emp;      
     }
     this.initializeSlide();
@@ -47,13 +49,13 @@ export class HomePage {
 
   initializeEmployees() {
     let emps = new SampleEmployees();
-    this.absentemployees = emps.employees;    
+    this.absentemployees = emps.employees;
   }
 
-  initializeSlide(){
+  initializeSlide() {
     this.currentEmployee = this.absentemployees[this.currentSlideIndex];
     let act = new SampleActions(this.currentEmployee.name);
-    this.actions = act.actions;    
+    this.actions = act.actions;
   }
 
   getActions() {
@@ -79,22 +81,32 @@ export class HomePage {
     }
   }
 
+  getLoader() {
+    return this.loading.create({
+      content: 'Loading Please Wait...',
+    });
+  }
+
   // callEmployee(emp:Employee){
   //   this.callNumber.callNumber(emp.contactnumber, true)
   //   .then()
   //   .catch(() => console.log('Error launching dialer'));
   // }
 
-  loadMap(searchstring:string) {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      
-      const browser = this.iab.create('https://www.google.co.in/maps/search/'+searchstring+'/@'+resp.coords.latitude+','+resp.coords.longitude+'','_self','location=no');  
-      browser.show();
-      // resp.coords.latitude
-      // resp.coords.longitude
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });    
+  loadMap(searchstring: string) {
+    var loader = this.getLoader();
+    loader.present().then(() => {
+      this.geolocation.getCurrentPosition().then((resp) => {
+
+        const browser = this.iab.create('https://www.google.co.in/maps/search/' + searchstring + '/@' + resp.coords.latitude + ',' + resp.coords.longitude + '', '_self', 'location=no');
+        browser.show();
+        // resp.coords.latitude
+        // resp.coords.longitude
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+      loader.dismiss();
+    });
   }
 
   openEmployee(employee: Employee) {
@@ -106,7 +118,6 @@ export class HomePage {
   getEmployees(ev) {
     // Reset items back to all of the items
     this.initializeEmployees();
-
     // set val to the value of the ev target
     var val = ev.target.value;
 
@@ -143,7 +154,7 @@ export class HomePage {
         }, {
           text: 'Mark Illness Complete',
           handler: () => {
-            var emp=this.absentemployees.find(x => x.employeeId == action.employeeId);
+            var emp = this.absentemployees.find(x => x.employeeId == action.employeeId);
             this.markActionDone(emp);
           }
         }, {
