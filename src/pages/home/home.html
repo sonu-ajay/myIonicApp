@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{currentEmployee.personalCode}}: {{currentEmployee.name}}</ion-title>
+    <ion-title style="text-align:center">{{currentEmployee.personalCode}}: {{currentEmployee.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -12,10 +12,10 @@
             <ion-card>
               <ion-item>
                 <ion-avatar item-start>
-                  <img [src]="emp.icon">
+                  <img [src]="emp.icon" alt="">
                 </ion-avatar>
                 <h2>{{emp.name}}</h2>
-                <p>On Leave Since : {{emp.leaveStartDate}}</p>
+                <p>Absent Since : {{emp.leaveStartDate}}</p>
               </ion-item>
               <ion-list>
                 <ion-item>

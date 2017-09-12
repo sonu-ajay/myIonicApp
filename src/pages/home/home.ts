@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import {
   NavController,
-  NavParams,
   ModalController,
   ActionSheetController
 } from 'ionic-angular';
@@ -9,7 +8,6 @@ import { Employee } from '../../models/employee';
 import { Action } from '../../models/action';
 import { SampleEmployees } from '../../models/sampleemployees';
 import { SampleActions } from '../../models/sampleactions';
-import { EmployeePage } from '../employee/employee';
 import { Slides } from 'ionic-angular';
 
 import { SickEmployeeService } from '../../_services/sickemployee.service';
@@ -26,26 +24,17 @@ export class HomePage {
   actions: Action[];
   currentSlideIndex: number;
   currentEmployee: Employee;
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController,navParams: NavParams, 
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController, 
     public sickemployees: SickEmployeeService,public maps:MapsProvider) {
     this.currentSlideIndex = 0;
     this.initializeEmployees();
-    var emp = navParams.get('item');
-    console.log(emp);
-
-    if (emp) {
-      this.currentSlideIndex = emp.employeeId - 1;
-      //this.currentEmployee=emp;      
-    }
-    this.initializeSlide();
   }
 
   initializeEmployees() {
     let emps = new SampleEmployees();
     this.absentemployees = emps.employees;
-  }
 
-  initializeSlide() {
+    //Call Actions
     this.currentEmployee = this.absentemployees[this.currentSlideIndex];
     let act = new SampleActions(this.currentEmployee.name);
     this.actions = act.actions;
@@ -72,12 +61,6 @@ export class HomePage {
     if (index !== -1) {
       this.absentemployees.splice(index, 1);
     }
-  }
-
-  openEmployee(employee: Employee) {
-    console.log(employee);
-    let modal = this.modalCtrl.create(EmployeePage, { emp: employee });
-    modal.present();
   }
 
   getEmployees(ev) {

@@ -5,12 +5,8 @@ import { MyApp } from './app.component';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { SickEmployeesPage } from '../pages/sickemployees/sickemployees';
-import { EmployeePage } from '../pages/employee/employee';
-import { ActionsPage } from '../pages/actions/actions';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,12 +22,8 @@ import { AlertProvider } from '../providers/alert.provider';
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage,
-    SickEmployeesPage,
-    EmployeePage,
-    ActionsPage
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -42,12 +34,8 @@ import { AlertProvider } from '../providers/alert.provider';
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage,
-    SickEmployeesPage,
-    EmployeePage,
-    ActionsPage
+    TabsPage
   ],
   providers: [
     StatusBar,
