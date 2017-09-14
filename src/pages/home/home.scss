@@ -3,10 +3,14 @@ page-home {
 }
 
 .swiper-button-prev{
-    margin-left: -10px;
-    height: 18px;
+    margin-left: -8px;
+    height: 22px;
 }
 .swiper-button-next{
-    margin-right: -10px;
-    height: 18px;
+    margin-right: -8px;
+    height: 22px;
+}
+
+.toolbar-md {
+    min-height: 35px !important;
 }

@@ -1,78 +1,74 @@
-<ion-content>
-  <ion-grid>
-    <ion-row style="background-color:#FFFFFF">
-      <ion-col>
-        <ion-slides (ionSlideDidChange)="getActions()">
-          <ion-slide *ngFor="let emp of absentemployees">
-              <ion-card></ion-card>
-            <ion-card>
-              <ion-item>
-              <ion-item>
-                <ion-avatar item-start>
-                  <img [src]="emp.icon" alt="">
-                </ion-avatar>
-                <h2>{{emp.name}}</h2>
-                <p>Absent Since : {{emp.leaveStartDate}}</p>
-              </ion-item>
-              <ion-list>
-                <ion-item>
-                  <ion-icon name='keypad' item-start color="primary"></ion-icon>
-                  <h2>Personal Code</h2>
-                  <h2 item-end>{{emp.personalCode}}</h2>
-                </ion-item>
-                <ion-item>
-                  <ion-icon name='cube' item-start color="primary"></ion-icon>
-                  <h2>Department</h2>
-                  <h2 item-end>{{emp.department}}</h2>
-                </ion-item>
-                <ion-item>
-                  <ion-icon name='calculator' item-start color="primary"></ion-icon>
-                  <h2>Leave Percentage</h2>
-                  <h2 item-end>{{emp.leavePercentage}}%</h2>
-                </ion-item>
-              </ion-list>
-            </ion-item>
-            </ion-card>            
-            <br/>
-          </ion-slide>
-          
-        </ion-slides>
-        <div class="swiper-button-prev" (click)="SlidePrev()"></div>
-        <div class="swiper-button-next" (click)="SlideNext()"></div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-title>Suggested Actions</ion-title>
-        <ion-list>
-          <ion-fab top right edge>
-            <button ion-fab mini><ion-icon name="add"></ion-icon></button>
-          </ion-fab>
-          <ion-item-sliding *ngFor="let act of actions">
+<ion-header>
+  <ion-navbar>
+    <ion-slides (ionSlideDidChange)="getActions()">
+      <ion-slide *ngFor="let emp of absentemployees">
+        <ion-card></ion-card>
+        <ion-card>
+          <ion-item>
             <ion-item>
-              <h2>{{act.title}}</h2>
-              <p>Used {{act.usageCount}} times</p>
-              <ion-icon name='arrow-forward' item-end style="color: #c40a1b"></ion-icon>
+              <ion-avatar item-start>
+                <img [src]="emp.icon" alt="">
+              </ion-avatar>
+              <h2>{{emp.name}}</h2>
+              <p>Absent Since : {{emp.leaveStartDate}}</p>
             </ion-item>
-            <ion-item-options side="right">
-              <button color="primary" ion-button (click)="presentActionSheet(act)">
-                    <ion-icon name="menu"></ion-icon>
-                    More Options
-                  </button>
-              <a href="tel:{{currentEmployee.contactnumber}}" color="secondary" ion-button>
-                <ion-icon name="call"></ion-icon>
-                Call Employee
-              </a>
-            </ion-item-options>
-            <ion-item-options side="left">
-              <button color="danger" ion-button (click)="removeAction(act)">
-                  <ion-icon name="close-circle"></ion-icon>
-                  Delete Action
-                </button>
-            </ion-item-options>
-          </ion-item-sliding>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            <ion-list>
+              <ion-item>
+                <ion-icon name='keypad' item-start color="primary"></ion-icon>
+                <h2>Personal Code</h2>
+                <h2 item-end>{{emp.personalCode}}</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='cube' item-start color="primary"></ion-icon>
+                <h2>Department</h2>
+                <h2 item-end>{{emp.department}}</h2>
+              </ion-item>
+              <ion-item>
+                <ion-icon name='calculator' item-start color="primary"></ion-icon>
+                <h2>Leave Percentage</h2>
+                <h2 item-end>{{emp.leavePercentage}}%</h2>
+              </ion-item>
+            </ion-list>
+          </ion-item>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+    <div class="swiper-button-prev" (click)="SlidePrev()"></div>
+    <div class="swiper-button-next" (click)="SlideNext()"></div>
+  </ion-navbar>
+  <ion-navbar>
+    <ion-title style="text-align:center;margin-top:-8px">
+      Suggested Actions
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab top right edge style="top:-45px;">
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  <ion-list>
+    <ion-item-sliding *ngFor="let act of actions">
+      <ion-item>
+        <h2>{{act.title}}</h2>
+        <ion-icon name='md-arrow-forward' item-end color="danger" (click)="presentActionSheet(act)"></ion-icon>
+      </ion-item>
+      <ion-item-options side="right">
+        <button color="primary" ion-button (click)="presentActionSheet(act)">
+            <ion-icon name="menu"></ion-icon>
+            More Options
+          </button>
+        <a href="tel:{{currentEmployee.contactnumber}}" color="secondary" ion-button>
+          <ion-icon name="call"></ion-icon>
+          Call Employee
+        </a>
+      </ion-item-options>
+      <ion-item-options side="left">
+        <button color="danger" ion-button (click)="removeAction(act)">
+            <ion-icon name="close-circle"></ion-icon>
+            Delete Action
+          </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
