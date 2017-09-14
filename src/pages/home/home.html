@@ -1,15 +1,12 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title style="text-align:center">{{currentEmployee.personalCode}}: {{currentEmployee.name}}</ion-title>
-  </ion-navbar>
-</ion-header>
 <ion-content>
   <ion-grid>
     <ion-row style="background-color:#FFFFFF">
       <ion-col>
         <ion-slides (ionSlideDidChange)="getActions()">
           <ion-slide *ngFor="let emp of absentemployees">
+              <ion-card></ion-card>
             <ion-card>
+              <ion-item>
               <ion-item>
                 <ion-avatar item-start>
                   <img [src]="emp.icon" alt="">
@@ -19,30 +16,34 @@
               </ion-item>
               <ion-list>
                 <ion-item>
-                  <ion-icon name='keypad' item-start style="color:red"></ion-icon>
+                  <ion-icon name='keypad' item-start color="primary"></ion-icon>
                   <h2>Personal Code</h2>
                   <h2 item-end>{{emp.personalCode}}</h2>
                 </ion-item>
                 <ion-item>
-                  <ion-icon name='cube' item-start style="color: indigo"></ion-icon>
+                  <ion-icon name='cube' item-start color="primary"></ion-icon>
                   <h2>Department</h2>
                   <h2 item-end>{{emp.department}}</h2>
                 </ion-item>
                 <ion-item>
-                  <ion-icon name='calculator' item-start style="color:yellow"></ion-icon>
+                  <ion-icon name='calculator' item-start color="primary"></ion-icon>
                   <h2>Leave Percentage</h2>
                   <h2 item-end>{{emp.leavePercentage}}%</h2>
                 </ion-item>
               </ion-list>
-            </ion-card><br/>
+            </ion-item>
+            </ion-card>
+            <div class="swiper-button-prev" (click)="SlidePrev()"></div>
+            <div class="swiper-button-next" (click)="SlideNext()"></div>
+            <br/>
           </ion-slide>
+          
         </ion-slides>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <ion-title>Suggested Actions</ion-title>
-
         <ion-list>
           <ion-fab top right edge>
             <button ion-fab mini><ion-icon name="add"></ion-icon></button>

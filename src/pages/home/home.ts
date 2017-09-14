@@ -30,6 +30,20 @@ export class HomePage {
     this.initializeEmployees();
   }
 
+  ngAfterViewInit() {
+    this.slides.centeredSlides = true;
+  }
+
+  SlidePrev()
+  {
+this.slides.slidePrev();
+  }
+
+  SlideNext()
+  {
+    this.slides.slideNext();
+  }
+
   initializeEmployees() {
     let emps = new SampleEmployees();
     this.absentemployees = emps.employees;
