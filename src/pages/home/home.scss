@@ -2,9 +2,9 @@ page-home {
 
 }
 
-// .swiper-slide {
-//     width: 95% !important;
-//       &:last-child {
-//         width: 100% !important;
-//       }
-//   }
+.swiper-button-prev{
+    margin-left: -10px;
+}
+.swiper-button-next{
+    margin-right: -10px;
+}
