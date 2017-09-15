@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import {
   NavController,
   ModalController,
-  ActionSheetController
+  ActionSheetController,
+  Content
 } from 'ionic-angular';
 import { Employee } from '../../models/employee';
 import { Slides } from 'ionic-angular';
@@ -18,6 +19,7 @@ import { AlertProvider } from '../../providers/alert.provider';
 })
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
+  @ViewChild(Content) content: Content;
   absentemployees: Employee[];
   actions: string[];
   currentSlideIndex: number;
@@ -27,11 +29,11 @@ export class HomePage {
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private actionSheetCtrl: ActionSheetController,
     private sickemployeeService: SickEmployeeService, private maps: MapsProvider, private alerts: AlertProvider) {
     this.currentSlideIndex = 0;
-    this.initializeEmployees();
+    this.initializeEmployees();    
   }
 
   ngAfterViewInit() {
-    this.slides.centeredSlides = true;
+    this.slides.centeredSlides = true;    
   }
 
   initializeEmployees() {
@@ -40,6 +42,7 @@ export class HomePage {
       this.currentEmployee = this.absentemployees[this.currentSlideIndex];
       this.getActions(this.currentEmployee);
       this.checkForSlideButtons();
+      this.content.resize();
     },
       err => {
         console.log("Error" + err);
