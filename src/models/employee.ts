@@ -1,6 +1,9 @@
 export class Employee{
+    Age:number;
+    IllnessNatureId:number;
+    IllnessTypeId:number;
     employeeId:number;
-    personalCode:string;
+    PersonalCode:string;
     name:string;    
     department:string;
     leaveStartDate:string;

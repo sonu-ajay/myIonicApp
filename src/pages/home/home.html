@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <ion-slides (ionSlideDidChange)="getActions()">
-      <ion-slide *ngFor="let emp of absentemployees">
+    <ion-slides (ionSlideDidChange)="ionSlideDidChange()">
+      <ion-slide *ngFor="let emp of absentemployees" style="margin-top: -14px;">
         <ion-card></ion-card>
         <ion-card>
           <ion-item>
@@ -10,13 +10,13 @@
                 <img [src]="emp.icon" alt="">
               </ion-avatar>
               <h2>{{emp.name}}</h2>
-              <p>Absent Since : {{emp.leaveStartDate}}</p>
+              <p>Absent Since : {{emp.leaveStartDate | date:"dd-MMM-yyyy"}}</p>
             </ion-item>
             <ion-list>
               <ion-item>
                 <ion-icon name='keypad' item-start color="primary"></ion-icon>
                 <h2>Personal Code</h2>
-                <h2 item-end>{{emp.personalCode}}</h2>
+                <h2 item-end>{{emp.PersonalCode}}</h2>
               </ion-item>
               <ion-item>
                 <ion-icon name='cube' item-start color="primary"></ion-icon>
@@ -33,8 +33,8 @@
         </ion-card>
       </ion-slide>
     </ion-slides>
-    <div class="swiper-button-prev" (click)="SlidePrev()"></div>
-    <div class="swiper-button-next" (click)="SlideNext()"></div>
+    <div *ngIf="prevbtn" class="swiper-button-prev" (click)="SlidePrev()"></div>
+    <div *ngIf="nextbtn" class="swiper-button-next" (click)="SlideNext()"></div>
   </ion-navbar>
   <ion-navbar>
     <ion-title style="text-align:center;margin-top:-8px">
@@ -42,15 +42,14 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content>
-  <ion-fab top right edge style="top:-45px;">
+<ion-content class="action-content">    
+  <ion-fab top right edge style="top:-55px;">
     <button ion-fab mini><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-  <br/>
   <ion-list>
-    <ion-item-sliding *ngFor="let act of actions">
-      <ion-item>
-        <h2>{{act.title}}</h2>
+    <ion-item-sliding *ngFor="let action of actions">
+      <ion-item style="padding:8px;">
+        <h2>{{action}}</h2>
         <ion-icon name='md-arrow-forward' item-end color="danger" (click)="presentActionSheet(act)"></ion-icon>
       </ion-item>
       <ion-item-options side="right">
@@ -72,3 +71,9 @@
     </ion-item-sliding>
   </ion-list>
 </ion-content>
+
+<style>
+  .fixed-content,.scroll-content{
+    margin-top: 319px;
+}
+</style>

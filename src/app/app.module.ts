@@ -4,8 +4,10 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
-import { AboutPage } from '../pages/about/about';
+import { IntroPage } from '../pages/intro/intro';
 import { HomePage } from '../pages/home/home';
+import { AboutPage } from '../pages/about/about';
+import { RewardsPage } from '../pages/rewards/rewards';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -13,7 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
 
-import { SickEmployeeService } from '../_services/sickemployee.service';
+import { SickEmployeeService } from '../pages/home//sickemployee.service';
 
 import { MapsProvider } from '../providers/map.provider';
 import { AlertProvider } from '../providers/alert.provider';
@@ -21,9 +23,11 @@ import { AlertProvider } from '../providers/alert.provider';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    IntroPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    AboutPage,
+    RewardsPage
   ],
   imports: [
     BrowserModule,
@@ -33,9 +37,11 @@ import { AlertProvider } from '../providers/alert.provider';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    IntroPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    AboutPage,
+    RewardsPage
   ],
   providers: [
     StatusBar,

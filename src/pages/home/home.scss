@@ -3,18 +3,23 @@ page-home {
 }
 
 .swiper-button-prev{
-    margin-left: -8px;
-    height: 22px;
+    margin-left: -5px;
+    height: 25px;
 }
 .swiper-button-next{
-    margin-right: -8px;
-    height: 22px;
+    margin-right: -5px;
+    height: 25px;
 }
 
 .toolbar-md {
-    min-height: 35px !important;
+    min-height: 55px !important;
 }
 
-ion-item-sliding{
-    min-height: 56px;
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{
+    height: 60px !important;
+}
+
+.slide-zoom{
+    padding-left: 15px;
+    padding-right: 15px;
 }

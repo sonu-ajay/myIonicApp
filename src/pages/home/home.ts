@@ -5,14 +5,12 @@ import {
   ActionSheetController
 } from 'ionic-angular';
 import { Employee } from '../../models/employee';
-import { Action } from '../../models/action';
-import { SampleEmployees } from '../../models/sampleemployees';
-import { SampleActions } from '../../models/sampleactions';
 import { Slides } from 'ionic-angular';
 
-import { SickEmployeeService } from '../../_services/sickemployee.service';
+import { SickEmployeeService } from './sickemployee.service';
 
 import { MapsProvider } from '../../providers/map.provider';
+import { AlertProvider } from '../../providers/alert.provider';
 
 @Component({
   selector: 'page-home',
@@ -21,11 +19,13 @@ import { MapsProvider } from '../../providers/map.provider';
 export class HomePage {
   @ViewChild(Slides) slides: Slides;
   absentemployees: Employee[];
-  actions: Action[];
+  actions: string[];
   currentSlideIndex: number;
   currentEmployee: Employee;
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public actionSheetCtrl: ActionSheetController, 
-    public sickemployees: SickEmployeeService,public maps:MapsProvider) {
+  nextbtn = true;
+  prevbtn = true;
+  constructor(private navCtrl: NavController, private modalCtrl: ModalController, private actionSheetCtrl: ActionSheetController,
+    private sickemployeeService: SickEmployeeService, private maps: MapsProvider, private alerts: AlertProvider) {
     this.currentSlideIndex = 0;
     this.initializeEmployees();
   }
@@ -34,33 +34,37 @@ export class HomePage {
     this.slides.centeredSlides = true;
   }
 
-  SlidePrev()
-  {
-this.slides.slidePrev();
-  }
-
-  SlideNext()
-  {
-    this.slides.slideNext();
-  }
-
   initializeEmployees() {
-    let emps = new SampleEmployees();
-    this.absentemployees = emps.employees;
-
-    //Call Actions
-    this.currentEmployee = this.absentemployees[this.currentSlideIndex];
-    let act = new SampleActions(this.currentEmployee.name);
-    this.actions = act.actions;
+    this.sickemployeeService.loadSickEmployees().subscribe(data => {
+      this.absentemployees = data['Employee'];
+      this.currentEmployee = this.absentemployees[this.currentSlideIndex];
+      this.getActions(this.currentEmployee);
+      this.checkForSlideButtons();
+    },
+      err => {
+        console.log("Error" + err);
+      },
+      () => console.log("Employee Search Complete")
+    );
   }
 
-  getActions() {
+  getActions(emp: Employee) {
+    this.sickemployeeService.loadSuggesstedActions(emp).subscribe(data => {
+      this.actions = data['Actions'];
+      console.log(this.actions);
+    },
+      err => {
+        console.log("Error" + err);
+      },
+      () => console.log("Action Search Complete")
+    );
+  }
+
+  ionSlideDidChange() {
     this.currentSlideIndex = this.slides.getActiveIndex();
-
     this.currentEmployee = this.absentemployees[this.currentSlideIndex];
-    let act = new SampleActions(this.currentEmployee.name);
-
-    this.actions = act.actions;
+    this.getActions(this.currentEmployee);
+    this.checkForSlideButtons();
   }
 
   removeAction(action) {
@@ -91,7 +95,31 @@ this.slides.slidePrev();
     }
   }
 
-  presentActionSheet(action: Action) {
+  SlidePrev() {
+    this.slides.slidePrev();
+    this.checkForSlideButtons();
+  }
+
+  SlideNext() {
+    this.slides.slideNext();
+    this.checkForSlideButtons();
+  }
+  checkForSlideButtons() {
+    if (this.currentSlideIndex == this.absentemployees.length - 1) {
+      this.nextbtn = false;
+    }
+    else {
+      this.nextbtn = true;
+    }
+    if (this.currentSlideIndex == 0) {
+      this.prevbtn = false;
+    }
+    else{
+      this.prevbtn = true;
+    }
+  }
+
+  presentActionSheet(action: string) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Perform Actions',
       buttons: [
@@ -116,8 +144,8 @@ this.slides.slidePrev();
         }, {
           text: 'Mark Illness Complete',
           handler: () => {
-            var emp = this.absentemployees.find(x => x.employeeId == action.employeeId);
-            this.markActionDone(emp);
+            // var emp = this.absentemployees.find(x => x.employeeId == action.employeeId);
+            // this.markActionDone(emp);
           }
         }, {
           text: 'Cancel',
