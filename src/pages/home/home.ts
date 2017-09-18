@@ -47,19 +47,18 @@ export class HomePage {
       err => {
         console.log("Error" + err);
       },
-      () => console.log("Employee Search Complete")
+      //() => console.log("Employee Search Complete")
     );
   }
 
   getActions(emp: Employee) {
     this.sickemployeeService.loadSuggesstedActions(emp).subscribe(data => {
       this.actions = data['Actions'];
-      console.log(this.actions);
     },
       err => {
         console.log("Error" + err);
       },
-      () => console.log("Action Search Complete")
+      //() => console.log("Action Search Complete")
     );
   }
 
