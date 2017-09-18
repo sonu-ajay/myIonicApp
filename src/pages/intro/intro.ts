@@ -18,12 +18,12 @@ export class IntroPage {
   slides = [
     {
       title: "Welcome to Smart Actions!",
-      description: "This app will help you reduce absentism by <b>Suggesting you effective actions using Artificial Intelligence</b>.",
+      description: "This app will help you reduce absenteesm by <b>Suggesting you effective actions using Artificial Intelligence</b>.",
       image: "https://i.imgur.com/bgCx4V6.png",
     },
     {
       title: "Absent Employees?",
-      description: "This section on the screen will show you the employee absent. You either slide <b>back/forward</b> or click <b></></b> to get the next/previous absent employee.",
+      description: "This section on the screen will show you the employee absent. You either slide <b>back/forward</b> or click <b>backward/forward arrows</b> to get the next/previous absent employee.",
       image: "https://i.imgur.com/iqgJZOw.png",
     },
     {
