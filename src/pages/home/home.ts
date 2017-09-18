@@ -70,15 +70,14 @@ export class HomePage {
     this.checkForSlideButtons();
   }
 
-  removeAction(action) {
-    let index: number = this.actions.indexOf(action);
-    if (index !== -1) {
-      this.actions.splice(index, 1);
+  removeAction(i) {
+    if (i !== -1) {
+      this.actions.splice(i, 1);
     }
   }
 
-  markActionDone(emp) {
-    let index: number = this.absentemployees.indexOf(emp);
+  markActionDone() {
+    let index: number = this.absentemployees.indexOf(this.currentEmployee);
     if (index !== -1) {
       this.absentemployees.splice(index, 1);
     }
@@ -122,7 +121,7 @@ export class HomePage {
     }
   }
 
-  presentActionSheet(action: string) {
+  presentActionSheet(i: string) {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Perform Actions',
       buttons: [
@@ -139,16 +138,15 @@ export class HomePage {
             this.maps.loadMap("Hospitals");
           }
         }, {
-          text: 'Remove Action',
+          text: 'Mark it done',
           role: 'Remove',
           handler: () => {
-            this.removeAction(action)
+            this.removeAction(i)
           }
         }, {
           text: 'Mark Illness Complete',
-          handler: () => {
-            // var emp = this.absentemployees.find(x => x.employeeId == action.employeeId);
-            // this.markActionDone(emp);
+          handler: () => {            
+             this.markActionDone();
           }
         }, {
           text: 'Cancel',
