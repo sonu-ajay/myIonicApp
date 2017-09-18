@@ -9,7 +9,7 @@ import { Employee } from '../../models/employee';
 export class SickEmployeeService {
 
     http: Http;
-    APIGetURL = "http://mlminnovate.azurewebsites.net";
+    APIGetURL = "http://smartaction.azurewebsites.net";
     constructor(http: Http) {
         this.http = http;
     }
@@ -20,7 +20,7 @@ export class SickEmployeeService {
     }
 
     loadSuggesstedActions(emp: Employee) {
-        var response = this.http.post(this.APIGetURL+"/?IllnessTypeId="+emp.IllnessTypeId+"&IllnessNatureId="+emp.IllnessNatureId+"&Age="+emp.Age+"", {})
+        var response = this.http.post(this.APIGetURL+"/?IllnessTypeId="+emp.IllnessTypeId+"&IllnessNatureId="+emp.IllnessNatureId+".0&Age="+emp.Age+"", {})
         .map(res => res.json());
         return response;
     }
