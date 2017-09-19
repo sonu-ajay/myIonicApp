@@ -40,7 +40,7 @@ export class MapsProvider {
         var loader = this.getLoader();
         loader.present();
         this.geolocation.getCurrentPosition().then((resp) => {
-            const browser = this.iab.create('https://www.google.co.in/maps/search/' + searchstring + '/@' + resp.coords.latitude + ',' + resp.coords.longitude + '', '_self', this.options);
+            const browser = this.iab.create('https://www.google.co.in/maps/search/' + searchstring + '/@' + resp.coords.latitude + ',' + resp.coords.longitude + '', '_blank', this.options);
             const watch = browser.on('loadstart').subscribe(type => {
                 if(type.type=="loadstop")
                 {
