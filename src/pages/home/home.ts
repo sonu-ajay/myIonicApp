@@ -59,6 +59,7 @@ export class HomePage {
     loader.present().then(() => {
       this.sickemployeeService.loadSuggesstedActions(emp).subscribe(data => {
         this.actions = data['Actions'];
+        this.updateEmployee(emp, this.actions);
       },
         err => {
           console.log("Error" + err);
@@ -69,10 +70,24 @@ export class HomePage {
     });
   }
 
+  updateEmployee(emp: Employee, act: string[]) {
+    let index = this.absentemployees.indexOf(emp);
+    if (index !== -1) {
+      emp.actions = act;
+      this.absentemployees[index] = emp;
+    }
+  }
+
   ionSlideDidChange() {
     this.currentSlideIndex = this.slides.getActiveIndex();
     this.currentEmployee = this.absentemployees[this.currentSlideIndex];
-    this.getActions(this.currentEmployee);
+    if (this.currentEmployee.actions) {
+      this.actions=this.currentEmployee.actions;
+    }
+    else
+    {
+      this.getActions(this.currentEmployee);
+    }
     this.checkForSlideButtons();
   }
 
