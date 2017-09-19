@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { InAppBrowser,InAppBrowserOptions } from '@ionic-native/in-app-browser';
+import { InAppBrowser,InAppBrowserOptions,InAppBrowserEvent } from '@ionic-native/in-app-browser';
 import { LoadingController } from 'ionic-angular';
 import { AlertProvider } from './alert.provider';
 
@@ -32,27 +32,24 @@ export class MapsProvider {
         
     getLoader() {
         return this.loading.create({
-            content: 'Loading Please Wait...',
+            content: 'Loading Maps...',
         });
     }
 
     loadMap(searchstring: string) {
         var loader = this.getLoader();
         loader.present();
-        this.createBrowser(searchstring);
-        loader.dismiss();
-        // loader.present().then(() => {           
-            
-        //     loader.dismiss();
-        // });
-    }
-
-    createBrowser(searchstring:string)
-    {
         this.geolocation.getCurrentPosition().then((resp) => {
             const browser = this.iab.create('https://www.google.co.in/maps/search/' + searchstring + '/@' + resp.coords.latitude + ',' + resp.coords.longitude + '', '_self', this.options);
+            const watch = browser.on('loadstart').subscribe(type => {
+                if(type.type=="loadstop")
+                {
+                    loader.dismiss();
+                }
+              });
             browser.show();
         }).catch((error) => {
+            loader.dismiss();
             this.alert.showAlert("Location Services !", "Your location services are disabled...");
         });
     }
