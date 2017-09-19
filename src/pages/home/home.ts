@@ -159,15 +159,10 @@ export class HomePage {
             this.maps.loadMap("Hospitals");
           }
         }, {
-          text: 'Mark it done',
+          text: 'Mark action as done',
           role: 'Remove',
           handler: () => {
             this.removeAction(i)
-          }
-        }, {
-          text: 'Mark Illness Complete',
-          handler: () => {
-            this.markActionDone();
           }
         }, {
           text: 'Cancel',
