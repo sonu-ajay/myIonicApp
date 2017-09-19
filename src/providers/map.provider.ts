@@ -38,15 +38,22 @@ export class MapsProvider {
 
     loadMap(searchstring: string) {
         var loader = this.getLoader();
-        loader.present();//.then(() => {           
-            this.geolocation.getCurrentPosition().then((resp) => {
-                const browser = this.iab.create('https://www.google.co.in/maps/search/' + searchstring + '/@' + resp.coords.latitude + ',' + resp.coords.longitude + '', '_self', this.options);
-                browser.show();
-            }).catch((error) => {
-                this.alert.showAlert("Location Services !", "Your location services are disabled...");
-            });
-            //loader.dismiss();
-        //});
+        loader.present();
+        this.createBrowser(searchstring);
         loader.dismiss();
+        // loader.present().then(() => {           
+            
+        //     loader.dismiss();
+        // });
+    }
+
+    createBrowser(searchstring:string)
+    {
+        this.geolocation.getCurrentPosition().then((resp) => {
+            const browser = this.iab.create('https://www.google.co.in/maps/search/' + searchstring + '/@' + resp.coords.latitude + ',' + resp.coords.longitude + '', '_self', this.options);
+            browser.show();
+        }).catch((error) => {
+            this.alert.showAlert("Location Services !", "Your location services are disabled...");
+        });
     }
 }
