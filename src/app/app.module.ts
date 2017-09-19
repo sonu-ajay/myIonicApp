@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { CacheModule } from "ionic-cache";
 
 import { IntroPage } from '../pages/intro/intro';
 import { HomePage } from '../pages/home/home';
@@ -32,6 +33,7 @@ import { AlertProvider } from '../providers/alert.provider';
   imports: [
     BrowserModule,
     HttpModule,
+    CacheModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

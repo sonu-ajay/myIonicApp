@@ -18,7 +18,7 @@ export class IntroPage {
   slides = [
     {
       title: "Welcome to Smart Actions!",
-      description: "This app will help you reduce absenteesm by <b>Suggesting you effective actions using Artificial Intelligence</b>.",
+      description: "This app will help you reduce absenteeism by <b>Suggesting you effective actions using Artificial Intelligence</b>.",
       image: "https://i.imgur.com/bgCx4V6.png",
     },
     {

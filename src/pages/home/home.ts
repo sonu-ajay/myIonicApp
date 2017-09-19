@@ -6,12 +6,11 @@ import {
   Content
 } from 'ionic-angular';
 import { Employee } from '../../models/employee';
-import { Slides } from 'ionic-angular';
+import { Slides, LoadingController } from 'ionic-angular';
 
 import { SickEmployeeService } from './sickemployee.service';
 
 import { MapsProvider } from '../../providers/map.provider';
-import { AlertProvider } from '../../providers/alert.provider';
 
 @Component({
   selector: 'page-home',
@@ -27,39 +26,47 @@ export class HomePage {
   nextbtn = true;
   prevbtn = true;
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private actionSheetCtrl: ActionSheetController,
-    private sickemployeeService: SickEmployeeService, private maps: MapsProvider, private alerts: AlertProvider) {
+    private sickemployeeService: SickEmployeeService, private maps: MapsProvider, private loading: LoadingController) {
     this.currentSlideIndex = 0;
-    this.initializeEmployees();    
+    this.initializeEmployees();
   }
 
   ngAfterViewInit() {
-    this.slides.centeredSlides = true;    
+    this.slides.centeredSlides = true;
   }
 
   initializeEmployees() {
-    this.sickemployeeService.loadSickEmployees().subscribe(data => {
-      this.absentemployees = data['Employee'];
-      this.currentEmployee = this.absentemployees[this.currentSlideIndex];
-      this.getActions(this.currentEmployee);
-      this.checkForSlideButtons();
-      this.content.resize();
-    },
-      err => {
-        console.log("Error" + err);
+    var loader = this.getLoader("Loading Absent Employees...");
+    loader.present().then(() => {
+      this.sickemployeeService.loadSickEmployees().subscribe(data => {
+        this.absentemployees = data['Employee'];
+        this.currentEmployee = this.absentemployees[this.currentSlideIndex];
+        this.getActions(this.currentEmployee);
+        this.checkForSlideButtons();
+        this.content.resize();
       },
-      //() => console.log("Employee Search Complete")
-    );
+        err => {
+          console.log("Error" + err);
+        },
+        //() => console.log("Employee Search Complete")
+      );
+      loader.dismiss();
+    });
   }
 
   getActions(emp: Employee) {
-    this.sickemployeeService.loadSuggesstedActions(emp).subscribe(data => {
-      this.actions = data['Actions'];
-    },
-      err => {
-        console.log("Error" + err);
+    var loader = this.getLoader("Recommendations are getting loaded...");
+    loader.present().then(() => {
+      this.sickemployeeService.loadSuggesstedActions(emp).subscribe(data => {
+        this.actions = data['Actions'];
       },
-      //() => console.log("Action Search Complete")
-    );
+        err => {
+          console.log("Error" + err);
+        },
+        //() => console.log("Action Search Complete")
+      );
+      loader.dismiss();
+    });
   }
 
   ionSlideDidChange() {
@@ -115,7 +122,7 @@ export class HomePage {
     if (this.currentSlideIndex == 0) {
       this.prevbtn = false;
     }
-    else{
+    else {
       this.prevbtn = true;
     }
   }
@@ -144,8 +151,8 @@ export class HomePage {
           }
         }, {
           text: 'Mark Illness Complete',
-          handler: () => {            
-             this.markActionDone();
+          handler: () => {
+            this.markActionDone();
           }
         }, {
           text: 'Cancel',
@@ -157,5 +164,11 @@ export class HomePage {
       ]
     });
     actionSheet.present();
+  }
+
+  getLoader(message) {
+    return this.loading.create({
+      content: message,
+    });
   }
 }
