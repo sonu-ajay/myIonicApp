@@ -23,3 +23,8 @@ page-home {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.overflow-me{
+    overflow: hidden;
+    text-overflow: ellipsis;
+   }
